@@ -22,7 +22,7 @@ public class PersistentWordCount {
         Config config = new Config();
 
         WordSpout spout = new WordSpout();
-        WordCounter bolt = new WordCounter();
+        WordCounterBolt bolt = new WordCounterBolt();
         MyHBaseBolt hbase = new MyHBaseBolt();
 
         // wordSpout ==> countBolt ==> HBaseBolt

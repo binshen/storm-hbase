@@ -1,9 +1,16 @@
 package com.moral;
 
-import org.apache.storm.shade.com.google.common.collect.Table;
-import org.apache.storm.shade.org.eclipse.jetty.io.Connection;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Connection;
+import org.apache.hadoop.hbase.client.ConnectionFactory;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.BasicOutputCollector;
+import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseBasicBolt;
 import org.apache.storm.tuple.Tuple;
 
@@ -28,7 +35,7 @@ public class MyHBaseBolt extends BaseBasicBolt {
             //do something to handle exception
         }
     }
-    @Override
+
     public void execute(Tuple tuple, BasicOutputCollector basicOutputCollector) {
         //从tuple中获取单词
         String word = tuple.getString(0);
@@ -46,6 +53,7 @@ public class MyHBaseBolt extends BaseBasicBolt {
             //do something to handle exception
         }
     }
+
     @Override
     public void cleanup() {
         //关闭table
@@ -62,7 +70,7 @@ public class MyHBaseBolt extends BaseBasicBolt {
             }
         }
     }
-    @Override
+
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
         //示例中本bolt不向外发射数据，所以没有再做声明
     }
